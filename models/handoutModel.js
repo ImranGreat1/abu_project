@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
-const handoutSchema = new mongoose.Schema({
+const handoutSchema = new Schema({
     title: {
         type: String,
         required: [true, 'Please provide the title of the handout!'],
@@ -31,7 +32,7 @@ const handoutSchema = new mongoose.Schema({
     },
     // parent reference
     user: {
-        type: mongoose.Schema.ObjectId,
+        type: Schema.ObjectId,
         ref: 'User',
         required: [true, 'A handout must be uploaded by a user!'],
         alias: 'uploadedBy',

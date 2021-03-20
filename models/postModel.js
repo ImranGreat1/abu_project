@@ -1,38 +1,31 @@
 const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 
 
 
-const postSchema = mongoose.Schema({
+const postSchema = new Schema({
     title: {
         type: String,
-        required: [true, 'A post must have a title!']
+        required: [true, 'A Post must have a title!']
     },
     user: {
-        type: mongoose.Schema.objectId,
+        type: Schema.objectId,
         ref: 'User',
-        required: [true, 'A post must be associated with a user!'],
+        required: [true, 'A Post must be associated with a user!'],
         alias: 'createdBy'
     },
     paragraphs: [
         {
             type: mongoose.Schema.objectId,
             ref: 'Paragraph',
-            required: [true, 'A post must have atleast one paragraph!']
+            required: [true, 'A Post must have atleast one paragraph!']
         }
     ],
-    likes: [
-        {
-            type: mongoose.Schema.objectId,
-            ref: 'Like',
-        }
-    ],
-    comments: [
-        {
-            type: mongoose.Schema.objectId,
-            ref: 'Like',
-        }
-    ]
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 
