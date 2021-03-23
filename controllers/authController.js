@@ -2,7 +2,7 @@ const util = require('util');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
-const filteredBody = require('./../utils/filteredBody');
+const filterBody = require('./../utils/filterBody');
 const jwt = require('jsonwebtoken');
 
 const signToken = (id) => {
@@ -39,7 +39,7 @@ const sendAuthResponse = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-    const fields = filteredBody(
+    const fields = filterBody(
         req.body,
         'name',
         'email',

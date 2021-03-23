@@ -5,7 +5,7 @@ line by line while promises are run in the event loop */
 process.on('uncaughtException', (err) => {
     console.log('UNCAUGHT EXCEPTION! Shutting down...');
     console.log(err.name, err.message);
-    // console.log(err);
+    console.log(err);
     /* NOT wait for any running or pending request because the process is in
     a so-called unclean state */
     process.exit(1);

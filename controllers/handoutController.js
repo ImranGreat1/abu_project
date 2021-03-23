@@ -2,7 +2,7 @@ const Handout = require('./../models/handoutModel');
 const multer = require('multer');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
-const filteredBody = require('./../utils/filteredBody');
+const filterBody = require('./../utils/filterBody');
 
 // const multerStorage = multer.memoryStorage();
 const multerStorage = multer.diskStorage({
@@ -34,7 +34,7 @@ const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 exports.uploadHandout = upload.single('handout');
 
 exports.createHandout = catchAsync(async (req, res, next) => {
-    const fields = filteredBody(req.body, 'title', 'courseCode');
+    const fields = filterBody(req.body, 'title', 'courseCode');
 
     if (!req.file) return next(new AppError('A handout document must provide the file!', 400))
 

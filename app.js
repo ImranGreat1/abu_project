@@ -13,6 +13,8 @@ const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const authRouter = require('./routes/authRoutes');
 const handoutRouter = require('./routes/handoutRoutes');
+const postRouter = require('./routes/postRoutes');
+
 
 const app = express();
 
@@ -46,7 +48,7 @@ app.use('/api', limiter);
 // Read JSON data in the req body and set limit to amount of data
 app.use(express.json({ limit: '10kb' }));
 
-// Read data from submited form url encoded data
+// Read data from submitted form url encoded data
 app.use(express.urlencoded({ extended: true }));
 
 // Data sanitization against NoSQL query injection
@@ -72,6 +74,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/v1/users', authRouter);
 app.use('/api/v1/handouts', handoutRouter);
+app.use('/api/v1/posts', postRouter);
 
 /* 404 ROUTE. This will match all route that are not handle by the previous 
 middlewares/routes */

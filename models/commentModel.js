@@ -17,5 +17,14 @@ const commentSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Post',
         required: [true, 'Comment must be associated to a post!']
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
     }
 })
+
+
+const Comment = mongoose.model('Comment', commentSchema);
+
+module.exports = Comment;

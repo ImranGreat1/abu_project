@@ -10,16 +10,29 @@ const postSchema = new Schema({
         required: [true, 'A Post must have a title!']
     },
     user: {
-        type: Schema.objectId,
+        type: Schema.ObjectId,
         ref: 'User',
         required: [true, 'A Post must be associated with a user!'],
         alias: 'createdBy'
     },
+    images: [
+        {
+            image: {
+                type: String,
+                required: [true, 'Please provide the image']
+            },
+            description: {
+                type: String,
+                maxLength: [150, 'Please image description should not be more than 150 characters']
+            }
+            
+        }
+    ],
     paragraphs: [
         {
-            type: mongoose.Schema.objectId,
+            type: Schema.ObjectId,
             ref: 'Paragraph',
-            required: [true, 'A Post must have atleast one paragraph!']
+            // required: [true, 'A Post must have atleast one paragraph!']
         }
     ],
     createdAt: {
