@@ -14,6 +14,7 @@ const AppError = require('./utils/appError');
 const authRouter = require('./routes/authRoutes');
 const handoutRouter = require('./routes/handoutRoutes');
 const postRouter = require('./routes/postRoutes');
+const paragraphRouter = require('./routes/paragraphRoutes');
 
 
 const app = express();
@@ -75,6 +76,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/users', authRouter);
 app.use('/api/v1/handouts', handoutRouter);
 app.use('/api/v1/posts', postRouter);
+app.use('/api/v1/paragraphs', paragraphRouter);
 
 /* 404 ROUTE. This will match all route that are not handle by the previous 
 middlewares/routes */
