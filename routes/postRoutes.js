@@ -4,7 +4,12 @@ const authController = require('../controllers/authController');
 
 const router = Router();
 
-router.route('/').post(authController.protect, postController.uploadPostImages, postController.processPostImages, postController.createPost);
+router.route('/').post(
+    authController.protect,
+    postController.uploadPostImages,
+    postController.processPostImages,
+    postController.createPost)
+    .get(postController.getAllPost);
 
 
 

@@ -15,7 +15,6 @@ const paragraphSchema = new Schema({
     },
     images: [
         {
-            type: String,
             name: {
                 type: String,
                 required: [true, 'An image must have a name']

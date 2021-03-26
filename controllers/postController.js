@@ -1,10 +1,12 @@
+const multer = require('multer');
+const { memoryStorage } = require('multer');
+const sharp = require('sharp');
 const Post = require('../models/postModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const filterBody = require('../utils/filterBody');
-const multer = require('multer');
-const { memoryStorage } = require('multer');
-const sharp = require('sharp');
+const factoryController = require('../controllers/factoryController');
+
 
 const multerStorage = memoryStorage();
 
@@ -26,7 +28,6 @@ exports.processPostImages = catchAsync(async (req, res, next) => {
     might cause unusual behaviours*/
     const processImage = async (buffer, imageName) => {
             await sharp(buffer)
-                    .resize(500, 500)
                     .toFormat('jpeg')
                     .jpeg({ quality: 100 })
                     .toFile(`public/img/post/${imageName}`)
@@ -73,3 +74,6 @@ exports.createPost = catchAsync(async (req, res, next) => {
         }
     })
 });
+
+
+exports.getAllPost = factoryController.getAll(Post);

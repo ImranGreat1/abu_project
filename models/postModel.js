@@ -41,8 +41,11 @@ const postSchema = new Schema({
     }
 });
 
+postSchema.pre(/^find/, function(next) {
+    this.populate('paragraphs');
+    next();
+});
 
 const Post = mongoose.model('Post', postSchema);
-
 
 module.exports = Post;
