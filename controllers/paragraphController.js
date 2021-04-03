@@ -5,9 +5,10 @@ const Post = require('../models/postModel');
 const AppError = require('../utils/appError');
 const filterBody = require('../utils/filterBody');
 
-
+// Create multer memory storage
 const multerStorage = multer.memoryStorage();
 
+// Filter invalid files
 const multerFilter = (req, file, cb) => {
     if (!file.mimetype.startsWith('image')) {
         return cb(new AppError('Please upload only images!', 400), false);
@@ -16,13 +17,16 @@ const multerFilter = (req, file, cb) => {
     return cb(null, true);
 };
 
+// Configure multer upload
 const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 
+// Upload not more than four images with the name image
 exports.uploadParagraphImages = upload.array('image', 4);
+
 
 exports.processParagraphImages = (req, res, next) => {
 
-     /* So that we don't make forEach functional handler async because it
+     /* So that we don't make forEach function handler async because it
     might cause unusual behaviours*/
     const processImage = async (buffer, imageName) => {
         await sharp(buffer)
@@ -57,9 +61,10 @@ exports.createParagraph = async (req, res, next) => {
     // console.log(res.locals.images);
     // Filter the body
     const data = filterBody(req.body, 'subHeading', 'text');
+    // get images we passed on res.locals.images
     data.images = res.locals.images;
 
-    // Create paragraph
+    // Create paragraph instance
     const paragraph = await Paragraph.create(data);
 
     // Add paragraph to post
