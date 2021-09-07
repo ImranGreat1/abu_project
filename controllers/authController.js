@@ -27,6 +27,7 @@ const sendAuthResponse = (user, statusCode, res) => {
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
     res.cookie('jwt', token, cookieOptions);
 
+    // Remove user's password before sending the response
     user.password = undefined;
 
     res.status(statusCode).json({
@@ -69,8 +70,10 @@ exports.login = catchAsync(async (req, res, next) => {
         );
     }
 
+    // find using by email and also including the password in the query
     const user = await User.findOne({ email }).select('+password');
 
+    // Check if the user exist, if it does also check if the password is correct
     if (!user || !(await user.correctPassword(password, user.password))) {
         return next(
             new AppError(
@@ -89,15 +92,19 @@ exports.protect = catchAsync(async (req, res, next) => {
     const authHeader = req.headers.authorization;
     let token;
 
+    // Check if auth token exist and if it starts with bearer (API)
     if (authHeader && authHeader.startsWith('Bearer')) {
+        // split and take the token only
         token = authHeader.split(' ')[1];
     } else if (
+        // Check if auth token exist and if it starts with bearer (Browser)
         req.cookies.jwt &&
         !req.headers['user-agent'].startsWith('PostmanRuntime')
     ) {
         token = req.cookies.jwt;
     }
 
+    // Check if the token exist
     if (!token) {
         return next(new AppError('Please login to access this route', 401));
     }
@@ -147,3 +154,40 @@ exports.restrictTo = (...allowedUsers) => {
         next();
     };
 };
+
+
+// USERS RELATIONSHIPS WITH OTHER DOCUMENTS
+
+
+// Save Assignment
+exports.saveAssignment = catchAsync(async (req, res, next) => {
+    // For both list and detail page
+    let assignment = req.params.slug ? req.params.slug : req.body.slug 
+  
+    // Find user and update savedAssignments
+    await User.findByIdAndUpdate(req.user.id, { $push : { savedAssignments: assignment } })
+  
+    // Response
+    res.status(200).json({
+      status: 'success',
+      message: 'Assignment saved successfully'
+    });
+  
+  });
+  
+  
+  // Remove Assignment
+  exports.removeAssignment = catchAsync(async (req, res, next) => {
+    // For both list and detail page
+    let assignment = req.params.slug ? req.params.slug : req.body.slug 
+  
+    // Find user and update savedAssignments
+    await User.findByIdAndUpdate(req.user.id, { $pop : { savedAssignments: assignment } })
+  
+    // Response
+    res.status(200).json({
+      status: 'success',
+      message: 'Assignment removed successfully'
+    });
+  
+  });

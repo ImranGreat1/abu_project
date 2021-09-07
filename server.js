@@ -6,8 +6,8 @@ process.on('uncaughtException', (err) => {
     console.log('UNCAUGHT EXCEPTION! Shutting down...');
     console.log(err.name, err.message);
     console.log(err);
-    /* NOT wait for any running or pending request because the process is in
-    a so-called unclean state */
+    /* This will NOT wait for any running or pending request because the process
+    is in a so-called unclean state */
     process.exit(1);
 });
 
@@ -15,6 +15,9 @@ require('dotenv').config({ path: './config.env' });
 const mongoose = require('mongoose');
 
 const app = require('./app');
+
+// Allows us to use getOneandUpdate
+mongoose.set('useFindAndModify', false);
 
 mongoose
     .connect(process.env.DATABASE, {
@@ -39,7 +42,8 @@ process.on('unhandledRejection', (err) => {
     console.log('UNHANDLED REJECTION! Shutting down...');
     console.log(err.name, err.message);
     console.log(err);
-    // wait for all previous request that are currently running or pending to finish.
+    /* This will wait for all previous request that are currently running or
+    pending to finish before shutting down the app*/
     server.close(() => {
         // Shutdown the application.
         process.exit(1); // 0 is success, 1 is uncaught exception
@@ -47,7 +51,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 /* 
-    Im production is not a good idea to just shut the app down, we will usually have a
+    In production it's not a good idea to just shut the app down, we will usually have a
     tool in place that will restart the app after it has shutdown. Most of the hosting
     platforms have the functionality that usually restart your app when it's down.
 */

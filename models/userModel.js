@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide your current department!'],
         lowercase: true,
-        enum: ['computer science', 'mathematics', 'physics'],
+        enum: ['computer science', 'mathematics', 'physics', 'insurance', 'accounting'],
     },
     level: {
         type: Number,
@@ -66,11 +66,13 @@ const userSchema = new mongoose.Schema({
             message: 'Password did NOT match!',
         },
     },
+    savedAssignments: [{ type: mongoose.Schema.ObjectId}],
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpired: Date,
 });
 
+// HASH PASSWORD BEFORE SAVING TO THE DATABASE
 userSchema.pre('save', async function (next) {
     // Only hash when password is just created or when updating the password.
     if (!this.isModified('password')) return next();
@@ -82,6 +84,7 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+// SET passwordChangeAt WHEN USER UPDATE HIS/HER PASSWORD
 userSchema.pre('save', function (next) {
     // Only set passwordChangeAt if the password is modified and also not on new user
     if (!this.isModified('password') || this.isNew) return next();
@@ -91,22 +94,22 @@ userSchema.pre('save', function (next) {
     next();
 });
 
-// Don't include deleted users
+// DON'T INCLUDE DELETED USERS ON QUERY
 userSchema.pre('find', function (next) {
     this.find({ active: { $ne: false } });
     next();
 });
 
-// Document method for comparing the real and encrypted password
-userSchema.methods.correctPassword = async function (
+// DOCUMENT METHOD TO COMPARE ENCRYPTED AND NON-ENCRYPTED PASSWORDS
+userSchema.methods.correctPassword = async (
     candidatePassword,
     userEncryptedPassword
-) {
+) => {
     // can't use this.password because select is set to false on the password field.
     return await bcrypt.compare(candidatePassword, userEncryptedPassword);
 };
 
-// Check if user has changed password after token has been issued.
+// DOCUMENT METHOD TO CHECK IF USER HAS CHANGED PASSWORD AFTER TOKEN HAS BEEN ISSUED
 userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
     if (this.passwordChangedAt) {
         // convert from miliseconds to seconds
@@ -118,7 +121,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
     return false;
 };
 
-// create password reset token for users that forgot their password
+// CREATE PASSWORD RESET TOKENS FOR USERS THAT FORGOT THEIR PASSWORD
 userSchema.methods.createPasswordResetToken = function () {
     const resetToken = crypto.randomBytes(32).toString('hex');
 

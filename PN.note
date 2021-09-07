@@ -1,0 +1,24 @@
+### BACKEND
+1. Handle cloud upload to google.cloud or amazon web service
+2. Check if their should be any nested routes between resources
+3. Check if we need to populate any resource or make virtual fields
+4. Code the Assignment model
+5. Code the Like model 
+6. Code the timetable model
+
+
+
+
+### FRONTEND
+1. Do the navigation for large screens
+2. Do the navigation for small screens
+3. Do the feed section for large screens
+4. Do the feed section for small screens
+5. Code the complete Signup page
+6. Code the complete Login page
+7. Code the user profile page
+
+
+
+# Done with Assignment
+# Comment is next

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
+const slugify = require('slugify');
 
 const handoutSchema = new Schema({
     title: {
@@ -30,15 +31,20 @@ const handoutSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    // parent reference
+    // PARENT REFERENCE
     user: {
         type: Schema.ObjectId,
         ref: 'User',
         required: [true, 'A handout must be uploaded by a user!'],
         alias: 'uploadedBy',
     },
+    slug: {
+        type: String,
+        unique: true
+    }
 });
 
+// INCLUDE PREFILL USER'S NAME AND EMAIL ON QUERY
 handoutSchema.pre(/^find/, function(next) {
     this.populate({
         path: 'user',
@@ -48,6 +54,11 @@ handoutSchema.pre(/^find/, function(next) {
 
     next();
 });
+
+handoutSchema.pre('save', function(next) {
+    this.slug = slugify(this.title, { lower: true, replacement: '-' });
+    next();
+})
 
 
 const Handout = mongoose.model('Handout', handoutSchema);

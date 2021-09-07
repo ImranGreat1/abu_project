@@ -4,10 +4,10 @@ const paragraphController = require("../controllers/paragraphController");
 const router = Router();
 
 router
-    .route("/:postId")
+    .route("/:slug")
     .post(
-        paragraphController.uploadParagraphImages,
-        paragraphController.processParagraphImages,
+        paragraphController.uploadParagraphImage,
+        paragraphController.processParagraphImage,
         paragraphController.createParagraph
     );
 

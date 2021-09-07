@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-
 const paragraphSchema = new Schema({
     subHeading: {
         type: String,
@@ -9,22 +8,20 @@ const paragraphSchema = new Schema({
     },
     text: {
         type: String,
-        required: [true, 'Paragraph must contain the paragraph text!'],
-        minLengh: 150,
-        maxLength: 400
+        required: [true, 'A Paragraph must contain the paragraph text!'],
+        minLength: [150, 'A Paragraph must not be less than 150 characters'],
+        maxLength: [600, 'A Paragraph must not be more than 600 characters'],
     },
-    images: [
-        {
-            name: {
-                type: String,
-                required: [true, 'An image must have a name']
-            },
-            description: {
-                type: String,
-                maxLength: 100,
-            }
+    image: {
+        name: {
+            type: String,
+            required: [true, 'An image must have a name']
+        },
+        description: {
+            type: String,
+            maxLength: 100,
         }
-    ]
+    }
 });
 
 

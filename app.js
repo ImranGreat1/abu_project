@@ -15,6 +15,10 @@ const authRouter = require('./routes/authRoutes');
 const handoutRouter = require('./routes/handoutRoutes');
 const postRouter = require('./routes/postRoutes');
 const paragraphRouter = require('./routes/paragraphRoutes');
+const commentRouter = require('./routes/commentRoutes');
+const exerciseRouter = require('./routes/exerciseRoutes');
+const likeRouter = require('./routes/likeRoutes');
+const assignmentRouter = require('./routes/assignmentRoutes');
 
 
 const app = express();
@@ -35,18 +39,18 @@ app.use(helmet());
 // Access control credentials
 app.use(cors());
 
-// To pass cookie in the req.cookies
+// To pass cookies in the req.cookies
 app.use(cookieParser());
 
 // Limit request on our API
 const limiter = rateLimit({
     max: 100,
     windowMs: 60 * 60 * 1000,
-    message: 'You have send too many requests! Try again after an hour.',
+    message: 'You have send too many requests! Try again in an hour.',
 });
 app.use('/api', limiter);
 
-// Read JSON data in the req body and set limit to amount of data
+// Read JSON data in the req body and set limit to size of data being send
 app.use(express.json({ limit: '10kb' }));
 
 // Read data from submitted form url encoded data
@@ -55,7 +59,7 @@ app.use(express.urlencoded({ extended: true }));
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
-// Data sanitization against XSS
+// Data sanitization against XSS 
 app.use(xss());
 
 // Prevention against parameter pollution
@@ -65,7 +69,7 @@ app.use(
     })
 );
 
-// Middleware for serving static files from a specific folder
+// For serving static files from a specific folder such as images & css
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
@@ -77,6 +81,10 @@ app.use('/api/v1/users', authRouter);
 app.use('/api/v1/handouts', handoutRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/paragraphs', paragraphRouter);
+app.use('/api/v1/comments', commentRouter);
+app.use('/api/v1/exercises', exerciseRouter);
+app.use('/api/v1/likes', likeRouter);
+app.use('/api/v1/assignments', assignmentRouter);
 
 /* 404 ROUTE. This will match all route that are not handle by the previous 
 middlewares/routes */

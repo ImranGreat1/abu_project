@@ -1,0 +1,183 @@
+[
+    {
+        "name" : "Imran Great",
+        "email": "admin@abu.com",
+        "phone": "07062260022",
+        "photo": "default.jpg",
+        "department": "computer science",
+        "level": 200,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+
+    {
+        "name" : "Salis Kabir",
+        "email": "sk@abu.com",
+        "phone": "0706yug0022",
+        "photo": "default.jpg",
+        "department": "computer science",
+        "level": 200,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+
+    {
+        "name" : "Salim Gire",
+        "email": "salimg@abu.com",
+        "phone": "0706hh22022",
+        "photo": "default.jpg",
+        "department": "computer science",
+        "level": 200,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+
+    {
+        "name" : "Oyin Ampitan",
+        "email": "scopy@abu.com",
+        "phone": "0806hh22022",
+        "photo": "default.jpg",
+        "department": "computer science",
+        "level": 200,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+
+    {
+        "name" : "Charles Haney",
+        "email": "haney112@abu.com",
+        "phone": "0906hh22022",
+        "photo": "default.jpg",
+        "department": "computer science",
+        "level": 200,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+
+
+
+    {
+        "name" : "Zahraddeen Muhammad",
+        "email": "zeeman@abu.com",
+        "phone": "08133733yy33",
+        "photo": "default.jpg",
+        "department": "insurance",
+        "level": 400,
+        "role": "representative",
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Salim Umar",
+        "email": "salim@abu.com",
+        "phone": "081337e3yy33",
+        "photo": "default.jpg",
+        "department": "insurance",
+        "level": 400,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "John Okhafor",
+        "email": "john@abu.com",
+        "phone": "090337e3yy33",
+        "photo": "default.jpg",
+        "department": "insurance",
+        "level": 400,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Maryam Jamo",
+        "email": "mjamo@abu.com",
+        "phone": "080337e3yy33",
+        "photo": "default.jpg",
+        "department": "insurance",
+        "level": 400,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+
+    {
+        "name" : "Muhammad Bello",
+        "email": "mb@abu.com",
+        "phone": "08031237yy33",
+        "photo": "default.jpg",
+        "department": "accounting",
+        "level": 400,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Mudi Modi",
+        "email": "modi77@abu.com",
+        "phone": "08031237yy31",
+        "photo": "default.jpg",
+        "department": "accounting",
+        "level": 400,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Peter Croach",
+        "email": "crouch@abu.com",
+        "phone": "08031237yy13",
+        "photo": "default.jpg",
+        "department": "accounting",
+        "level": 400,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Abdulmajid Kabir",
+        "email": "ak47@abu.com",
+        "phone": "08031237xy33",
+        "photo": "default.jpg",
+        "department": "accounting",
+        "level": 400,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+
+
+    {
+        "name" : "Maryam Suleiman",
+        "email": "mamads@abu.com",
+        "phone": "08037137xy33",
+        "photo": "default.jpg",
+        "department": "physics",
+        "level": 300,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Attah Jega",
+        "email": "atg@abu.com",
+        "phone": "08037037xy33",
+        "photo": "default.jpg",
+        "department": "physics",
+        "level": 300,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Nnamdi Azikwe",
+        "email": "nnk@abu.com",
+        "phone": "08011237xy33",
+        "photo": "default.jpg",
+        "department": "physics",
+        "level": 300,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name" : "Ahmed Aliyu",
+        "email": "ahmed82@abu.com",
+        "phone": "08031837xy33",
+        "photo": "default.jpg",
+        "department": "physics",
+        "level": 300,
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    }
+]

@@ -1,11 +1,13 @@
 {
   "name": "Edutain",
   "version": "1.0.0",
-  "description": "Edutain, an app that give ABU students the information they need. ",
+  "description": "Edutain, an app that give ABU students the information they need",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "start:prod": "nodemon server.js NODE_ENV=production",
+    "server": "nodemon server.js",
+    "client": "cd client && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\" ",
+    "start:prod": "node server.js NODE_ENV=production",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
@@ -26,10 +28,11 @@
     "helmet": "^4.4.1",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.11",
+    "mongoose": "^5.12.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.17",
+    "overlayscrollbars": "^1.13.1",
     "paystack": "^2.0.1",
     "pdf-lib": "^1.16.0",
     "pug": "^3.0.0",
@@ -40,6 +43,7 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "parcel-bundler": "^1.12.3"
   }
 }

@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const { Model } = require('mongoose');
 // const APIFeatures = require('./../utils/apiFeatures');
 
 exports.deleteOne = (Model) => {
@@ -24,7 +25,7 @@ exports.updateOne = (Model) => {
         });
 
         if (!doc) {
-            return next(new AppError('Cannot find document with that ID', 404));
+            return next(new AppError(`Cannot find document with that ID`, 404));
         }
 
         res.status(200).json({
@@ -53,14 +54,20 @@ exports.createOne = (Model) => {
 
 exports.getOne = (Model, popOptions) => {
     return catchAsync(async (req, res, next) => {
+        // Exclude await keyword to make it return a query object
         let query = Model.findById(req.params.id);
+
+        // use the populate function if the popOptions is provided
         if (popOptions) query = query.populate(popOptions);
 
+        // Await the query
         const doc = await query;
 
+        // Send a 404 response if document is not found
         if (!doc) {
             return next(new AppError('Cannot find document with that ID', 404));
         }
+
         res.status(200).json({
             status: 'success',
             data: { data: doc },

@@ -1,0 +1,53 @@
+.header {
+    height: 95vh;
+    justify-content: space-between;
+    background-image: linear-gradient(to right bottom, rgba(0, 255, 128, 0.295), rgba(0, 255, 128, 0.295)), url('./bg.jpg');
+    background-size: cover;
+    background-position: bottom;
+    padding: 0 2rem;
+    /* margin: 2rem; */
+    /* align-items: center; */
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    position: relative;
+}
+
+.header__logo {
+    position: absolute;
+    font-size: 2rem;
+    top: 1rem;
+}
+
+.header__logo a {
+    color: #fff;
+}
+
+.header__nav {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.header__user-avatar {
+    display: block;
+    height: 5rem;
+    /* border-radius: 50%; */
+    /* border: 1px solid red; */
+}
+
+.header__links {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header__link-item {
+
+}
+
+.header__link {
+    display: block;
+    margin-right: 2rem;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    color: #fff;
+}

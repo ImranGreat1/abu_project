@@ -1,0 +1,22 @@
+.handout {
+    box-shadow: 0 1px 1px #a3a3a3;
+    margin: 0 auto;
+    padding: 2rem;
+    margin: 1rem;
+}
+
+.handout a {
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: .7rem 2rem;
+    background-color: #333;
+    color: #fff;
+    border-radius: 3px;
+    transition: all .3s;
+}
+
+.handout a:hover {
+    background-color: #777;
+}
+

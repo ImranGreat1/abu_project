@@ -1,0 +1,142 @@
+.nav {
+  position: fixed;
+  top: 0;
+  /* right: 0; */
+  left: 0;
+  height: 100vh;
+  width: 25rem;
+  background-color: #fff;
+  z-index: 150;
+  /* padding: 2rem; */
+  /* display: none; */
+  overflow-y: auto;
+}
+
+.nav__close-btn {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  border: 5px solid #ccc;
+  background-color: #ccc;
+}
+
+.nav__close-btn::before,
+.nav__close-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 2px;
+  width: 100%;
+  background-color: #111;
+}
+
+.nav__close-btn::before {
+  transform: translateY(-50%) rotate(145deg);
+}
+
+.nav__close-btn::after {
+  transform: translateY(-50%) rotate(35deg);
+}
+
+.nav__logo {
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 2rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.nav__list {
+  z-index: 2000;
+}
+
+.nav__list-item {
+  /* text-align: center; */
+}
+
+.nav__link {
+  display: block;
+  padding: .7rem;
+  padding-left: 2.5rem;
+  font-size: 1.4rem;
+  transition: all .2s;
+  position: relative;
+}
+
+.nav__link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: .4rem;
+  height: 100%;
+  border-top-right-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  transition: all .2s;
+}
+
+.nav__link:hover {
+  background-color: #f5f5f5;
+  color: yellowgreen;
+}
+
+.nav__link:hover::before {
+  background-color: limegreen;
+}
+
+
+.hamburger {
+  position: fixed;
+  right: 4rem;
+  top: 4rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  padding: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  /* display: none; */
+}
+
+.hamburger__lines {
+  position: relative;
+  background-color: #333;
+  height:.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50px;
+}
+
+.hamburger__lines::before,
+.hamburger__lines::after
+ {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #333;
+  border-radius: 50px;
+}
+
+.hamburger__lines::before {
+  top: .6rem;
+}
+
+.hamburger__lines::after {
+  top: -.6rem;
+}
+
+.hamburger__checkbox {
+  width: 4.5rem;
+  height: 4.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
