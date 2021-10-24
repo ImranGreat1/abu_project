@@ -1,0 +1,87 @@
+.library {
+}
+
+.library__header {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.library__main {
+  /* padding: 0 8rem; */
+}
+
+.library__header-links:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.current {
+  color: #51cf66;
+  position: relative;
+}
+
+.current::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 4rem;
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 3rem;
+  background-color: #51cf66;
+  transition: all 0.2s;
+}
+
+/* LIBRARY HANDOUTS STYLING */
+.handouts {
+  padding: 6rem;
+  padding-top: 0;
+}
+
+.handouts__header-text {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 575.98px) {
+  .handouts {
+    padding: 4rem;
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .handouts__header-text {
+    margin-bottom: 2rem;
+  }
+}
+
+.handouts__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
+  row-gap: 3rem;
+}
+
+@media screen and (max-width: 60rem) {
+  .handouts {
+    padding: 3rem;
+    padding-top: 0;
+  }
+
+  .handouts__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 35rem) {
+  .handouts {
+    padding-top: 3rem;
+  }
+
+  .handouts__list {
+    grid-template-columns: 1fr;
+  }
+}

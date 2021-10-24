@@ -1,43 +1,54 @@
-.form__group {
-  margin-bottom: 2rem;
-  position: relative;
-}
-
-.form__label {
+.input__label {
   display: block;
   font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: .4rem;
-  color: #555;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  color: #6b7280;
 }
 
-.form__input {
+.input__icon {
+  display: inline-block;
+  position: absolute;
+  transform: translate(1.5rem, 0.8rem);
+  font-size: 2rem;
+  /* color: #74c0fc; */
+  color: #999;
+}
+
+.input__input {
   width: 100%;
-  padding: 1.4rem;
-  border-radius: 1rem;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
   outline: none;
-  font-size: 1.3rem;
-  border: 1px solid #dee2e6;
+  font-size: 1.7rem;
+  border: 1px solid #dbeafe;
   color: #555;
 }
 
-.form__input::placeholder {
+.input__input:focus {
+  border: 1px solid #74c0fc;
+}
+
+.input__input::placeholder {
+  font-size: 1.3rem;
+}
+
+.more-padding {
+  padding-left: 5rem;
+}
+
+.input__input::placeholder {
   color: #c6c6c6;
 }
 
-.form__input.invalid {
-  border: 1px solid #ffa8a8;
+.input__input.invalid {
+  border: 1px solid rgb(211, 140, 7);
 }
 
-.form__input.detail-error {
-  border: 1px solid #ffa8a8;
-  background-color: #ffe3e3;
-}
-
-.form__error {
-  color: red;
+.input__error {
+  color: rgb(211, 140, 7);
   font-size: 1.1rem;
-  margin-top: .3rem;
+  margin-top: 0.3rem;
 }
 
 .forget-password {
@@ -45,7 +56,7 @@
   width: 100%;
   text-align: right;
   /* transform: translateX(-50%); */
-  margin-top: .7rem;
+  margin-top: 0.7rem;
 }
 
 .forget-password a {

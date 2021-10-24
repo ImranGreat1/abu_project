@@ -1,0 +1,136 @@
+.section-posts {
+  padding: 0 6rem 0 6rem;
+}
+
+.section-posts__header {
+  display: flex;
+  align-items: center;
+  margin: 1rem 2rem 4rem;
+}
+
+@media screen and (max-width: 575.98px) {
+  .section-posts__header {
+    display: block;
+    margin: 1rem 0.5rem 2.5rem;
+  }
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1rem;
+}
+
+.posts__loading {
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 991.98px) {
+  .section-posts {
+    padding: 0 3rem;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .section-posts {
+    padding: 0 2rem;
+  }
+
+  .posts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-posts__search {
+  flex-basis: 38rem;
+}
+
+.filter-links {
+  display: inline-flex;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 575.98px) {
+  .filter-links {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .filter-links__item {
+    margin: 0rem;
+  }
+}
+
+.filter-links__item {
+  margin: 0 1.5rem;
+}
+
+@media screen and (max-width: 575.98px) {
+  .filter-links__item {
+    margin: 0 1rem;
+  }
+}
+
+.filter-links__link {
+  font-size: 1.5rem;
+  position: relative;
+  transition: all 0.2s;
+  padding-bottom: 0.6rem;
+}
+
+.filter-links__link:hover {
+  color: #51cf66;
+}
+
+.current {
+  color: #51cf66;
+}
+
+.current::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 4rem;
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 3rem;
+  background-color: #51cf66;
+  transition: all 0.2s;
+}
+
+@media screen and (max-width: 575.98px) {
+  .current::before {
+    height: 2px;
+  }
+}
+
+.current:hover::before {
+  background-color: #51cf66;
+}
+
+.read-more {
+  margin-left: 1.5rem;
+  transform: translateY(-1.5rem);
+}
+
+.read-more__link {
+  font-size: 1.4rem;
+  color: #1d4ed8;
+  transition: all 0.2s;
+}
+
+.read-more__link:hover {
+  display: inline-block;
+}
+
+.read-more__link:hover .read-more__arrow {
+  transform: translateX(1rem);
+}
+
+.read-more__arrow {
+  display: inline-block;
+  transform: translateX(0.6rem);
+  transition: all 0.2s;
+}

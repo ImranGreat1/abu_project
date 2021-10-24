@@ -1,0 +1,12 @@
+.home {
+}
+
+.home__header {
+  height: 40vh;
+  background-color: blanchedalmond;
+  background-image: linear-gradient(to right, #00c3ff, #ffff1c);
+}
+
+.home__post-section {
+  padding: 2rem;
+}

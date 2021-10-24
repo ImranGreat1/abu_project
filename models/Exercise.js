@@ -7,22 +7,21 @@ const exerciseSchema = new mongoose.Schema({
   level: String,
   shared: {
     type: Boolean,
-    default: false
+    default: false,
   },
   score: {
     type: Number,
-    default: 0
+    default: 0,
   },
-  questions: Array,
   createdBy: mongoose.Schema.ObjectId,
   slug: {
     type: String,
     required: [true, 'An exercise must have a slug!'],
-    unique: true
-  }
+    unique: true,
+  },
 });
 
-exerciseSchema.pre('save', function(next) {
+exerciseSchema.pre('save', function (next) {
   this.slug = generateUniqueSlug(description);
   next();
 });
@@ -30,4 +29,3 @@ exerciseSchema.pre('save', function(next) {
 const Exercise = mongoose.model('Exercise', exerciseSchema);
 
 module.exports = Exercise;
-

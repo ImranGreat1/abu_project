@@ -1,17 +1,92 @@
 .btn {
-  padding: 1.5rem 3.7rem;
+  display: inline-block;
+  padding: 1.1rem 2rem;
+  font-size: 1.3rem;
+  border-radius: 0.4rem;
   outline: none;
   border: none;
-  border-radius: .5rem;
-  font-size: 1.4rem;
   background-color: #339af0;
   color: #fff;
-  transition: all .2s;
+  transition: all 0.3s;
   cursor: pointer;
+  line-height: 1;
 }
+
+/* Reduce 1px to outline buttons because of the 1px border added to them */
+
+.btn-outline--primary {
+  border: 1px solid #8ce99a;
+  background-color: #f4f4f4;
+  color: #2f9e44;
+  outline: none;
+  padding: 1rem 2rem;
+}
+
+.btn-outline--danger {
+  border: 1px solid #ff6b6b;
+  background-color: #f4f4f4;
+  color: #fa5252;
+  outline: none;
+  padding: 1rem 2rem;
+}
+
+/* Modifiers */
+.btn--danger {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.btn--small {
+  padding: 0.6rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.btn--small.btn-outline--primary,
+.btn--small.btn-outline--danger {
+  padding: 0.5rem 0.8rem;
+}
+
+.btn--large {
+  padding: 1.5rem 3.7rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+}
+
+/* HOVER EFFECTS */
 
 .btn:hover {
   background-color: #228be6;
+  /* border: 1px solid #339af0; */
+}
+
+.btn--danger:hover {
+  background-color: #fa5252;
+  /* border: 1px solid #fa5252; */
+}
+
+.btn-outline--primary:hover {
+  background-color: #69db7c;
+  /* border: 1px solid #69db7c; */
+  color: #fff;
+}
+
+.btn-outline--primary.no-hover:hover {
+  border: 1px solid #8ce99a;
+  background-color: #f4f4f4;
+  color: #2f9e44;
+}
+
+.btn-outline--danger:hover {
+  background-color: #ff6b6b;
+  /* border: 1px solid #ff6b6b; */
+  color: #fff;
+}
+
+.btn:disabled {
+  background-color: gray;
+  color: #fff;
+  border: none;
 }
 
 .btn--round {
@@ -22,3 +97,6 @@
   width: 100%;
 }
 
+.text-upper {
+  text-transform: uppercase;
+}

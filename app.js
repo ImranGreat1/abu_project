@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
 const xss = require('xss-clean');
 const cors = require('cors');
+const cspHeader = require('./utils/csp-header');
 
 const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
@@ -19,7 +20,10 @@ const commentRouter = require('./routes/commentRoutes');
 const exerciseRouter = require('./routes/exerciseRoutes');
 const likeRouter = require('./routes/likeRoutes');
 const assignmentRouter = require('./routes/assignmentRoutes');
-
+const userRouter = require('./routes/userRoutes');
+const libraryRouter = require('./routes/libraryRoutes');
+const userProfileRouter = require('./routes/userProfileRoutes');
+const suggestionRouter = require('./routes/suggestionRoutes');
 
 const app = express();
 
@@ -29,8 +33,8 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 if (process.env.NODE_ENV === 'development') {
-    // middleware for logging request info
-    app.use(morgan('dev'));
+  // middleware for logging request info
+  app.use(morgan('dev'));
 }
 
 // Sets security HTTP headers
@@ -44,9 +48,9 @@ app.use(cookieParser());
 
 // Limit request on our API
 const limiter = rateLimit({
-    max: 100,
-    windowMs: 60 * 60 * 1000,
-    message: 'You have send too many requests! Try again in an hour.',
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'You have send too many requests! Try again in an hour.',
 });
 app.use('/api', limiter);
 
@@ -59,21 +63,21 @@ app.use(express.urlencoded({ extended: true }));
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
-// Data sanitization against XSS 
+// Data sanitization against XSS
 app.use(xss());
 
 // Prevention against parameter pollution
 app.use(
-    hpp({
-        whitelist: ['name'],
-    })
+  hpp({
+    whitelist: ['name'],
+  })
 );
 
 // For serving static files from a specific folder such as images & css
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.status(200).render('Hello World!');
+  res.status(200).render('Hello World!');
 });
 
 // Routes
@@ -85,16 +89,20 @@ app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/exercises', exerciseRouter);
 app.use('/api/v1/likes', likeRouter);
 app.use('/api/v1/assignments', assignmentRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/libraries', libraryRouter);
+app.use('/api/v1/profiles', userProfileRouter);
+app.use('/api/v1/suggestions', suggestionRouter);
 
 /* 404 ROUTE. This will match all route that are not handle by the previous 
 middlewares/routes */
 app.all('*', (req, res, next) => {
-    const error = new AppError(
-        `Cannot find ${req.originalUrl} on this server.`,
-        404
-    );
+  const error = new AppError(
+    `Cannot find ${req.originalUrl} on this server.`,
+    404
+  );
 
-    next(error);
+  next(error);
 });
 
 app.use(globalErrorHandler);

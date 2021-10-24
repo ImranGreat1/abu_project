@@ -1,0 +1,259 @@
+.assignments {
+  padding: 3rem 6rem;
+}
+
+.assignments__header {
+}
+
+.assignments__header-text {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.assignments__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media screen and (max-width: 767.98px) {
+  .assignments {
+    padding: 3rem;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .assignments__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.assignment {
+  background-color: rgba(#f4fce3, 1);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+  border-radius: 1.4rem;
+}
+
+.assignment__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.assignment__course-code {
+  /* margin-right: 4rem; */
+  font-size: 1.4rem;
+  font-weight: 500;
+  /* background-image: linear-gradient(to right, #ffa94d, #37b24d);
+  background-clip: text; */
+  color: #37b24d;
+}
+
+.assignment__date {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #999;
+}
+
+.assignment__desc {
+  font-size: 1.3rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.assignment__submission {
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #777;
+  border-bottom: 1px solid #ced4da;
+}
+
+.assignment__submission-text {
+  margin-right: 0.6rem;
+}
+
+.assignment__submission-date {
+  color: green;
+  font-weight: 600;
+}
+
+.assignment__cta {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ASSIGNMENT DETAIL */
+.assignment-detail {
+  width: 70%;
+  padding: 4rem 6rem;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1399.98px) {
+  .assignment-detail {
+    width: 75%;
+    padding: 4rem;
+  }
+}
+
+@media screen and (max-width: 1199.98px) {
+  .assignment-detail {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .assignment-detail {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .assignment-detail {
+    width: 100%;
+    padding: 6rem;
+  }
+}
+
+@media screen and (max-width: 419.98px) {
+  .assignment-detail {
+    padding: 3rem;
+  }
+}
+
+.assignment-detail__header {
+}
+
+.assignment-detail__course-code {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  /* color: #344; */
+  background-image: linear-gradient(to right bottom, #37b24d, #ffa94d);
+  background-clip: text;
+  color: transparent;
+}
+
+.assignment-detail__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #717171;
+  margin-bottom: 2rem;
+}
+
+.assignment-detail__sub-date {
+  margin-right: 2rem;
+  border-bottom: 1px solid #ced4da;
+}
+
+.assignment-detail__date {
+  margin-right: 3rem;
+  background-color: #ffa94d;
+  border-radius: 30rem;
+  padding: 0.3rem 1rem;
+  color: #fff;
+}
+
+.assignment-detail__desc {
+  font-size: 1.4rem;
+  color: #444;
+}
+
+@media screen and (max-width: 419.98px) {
+  .assignment-detail__sub-date {
+    margin-right: 1rem;
+  }
+
+  .assignment-detail__date {
+    margin-right: 1rem;
+  }
+}
+
+/* HANDOUT FORM */
+.assignment-form {
+  width: 70%;
+  margin: 4rem auto 3rem;
+  min-height: 100vh;
+}
+
+.assignment-form__header {
+  margin-bottom: 2rem;
+}
+
+.form__group {
+  margin-bottom: 1.5rem;
+}
+
+.form__inline-group {
+  display: flex;
+  align-items: center;
+}
+
+.form__label {
+  display: block;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.form__input,
+.form__description {
+  width: 100%;
+  height: 3rem;
+  padding: 2rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.4rem;
+  border: 2px solid #ddd;
+  outline: none;
+}
+
+.form__description {
+  height: 15rem;
+}
+
+.form__active {
+  border: 2px solid #ddd;
+  outline: none;
+  padding: 1.2rem 2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.form__active-group {
+  margin-left: 5rem;
+}
+
+.form__cta {
+  display: flex;
+  justify-content: end;
+  margin-top: 2rem;
+}
+
+.form__delete {
+  margin-top: 4rem;
+}
+
+/* Image File Style */
+.real-file {
+  display: none;
+}
+
+.custom-file {
+  display: flex;
+  align-items: center;
+}
+
+.custom-file__label {
+  font-size: 1.2rem;
+}
+
+/* Loading */
+.assignments__loading {
+  margin-top: 4rem;
+}

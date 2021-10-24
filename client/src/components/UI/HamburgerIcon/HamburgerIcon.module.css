@@ -1,0 +1,72 @@
+.hamburger {
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: rgba(255, 255, 255);
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 1rem;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); */
+  z-index: 100;
+  /* display: none; */
+}
+
+.hamburger__lines {
+  position: relative;
+  background-color: #333;
+  height: 0.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50px;
+}
+
+.hamburger__lines::before,
+.hamburger__lines::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 0.3rem;
+  background-color: #333;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.hamburger__lines::before {
+  width: 75%;
+  transform: translateY(0.6rem);
+}
+
+.hamburger__lines::after {
+  width: 55%;
+  /* top: -0.8rem; */
+  transform: translateY(-0.6rem);
+}
+
+.hamburger__lines.open {
+  /* opacity: 0; */
+  background-color: transparent;
+}
+
+.hamburger__lines.open::before,
+.hamburger__lines.open::after {
+  background-color: #333;
+  transform: rotate(45deg);
+  top: 0;
+  width: 70%;
+  border-radius: 50px;
+}
+
+.hamburger__lines.open::before {
+  transform: rotate(45deg);
+}
+.hamburger__lines.open::after {
+  transform: rotate(-45deg);
+}
+
+.hamburger__checkbox {
+  width: 4.5rem;
+  height: 4.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}

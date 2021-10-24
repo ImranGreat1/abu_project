@@ -1,0 +1,100 @@
+.btn-with-icon {
+  padding: 0.9rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 0.4rem;
+  outline: none;
+  border: none;
+  background-color: #339af0;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+  line-height: 1;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-with-icon__icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-right: 0.4rem;
+}
+
+.btn-with-icon__text {
+  display: inline-block;
+  transform: translateY(1px);
+}
+
+/* Modifiers */
+.btn--danger {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.btn--small {
+  padding: 0.6rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.btn-with-icon--large {
+  padding: 1.5rem 3.7rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.btn-with-icon-outline--primary {
+  border: 1px solid #8ce99a;
+  background-color: #f4f4f4;
+  color: #2f9e44;
+  outline: none;
+}
+
+.btn-with-icon-outline--danger {
+  border: 1px solid #ff6b6b;
+  background-color: #f4f4f4;
+  color: #fa5252;
+  outline: none;
+}
+
+/* HOVER EFFECTS */
+
+.btn-with-icon:hover {
+  background-color: #228be6;
+}
+
+.btn-with-icon--danger:hover {
+  background-color: #fa5252;
+}
+
+.btn-with-icon-outline--primary:hover {
+  background-color: #69db7c;
+  color: #fff;
+}
+
+.btn-with-icon-outline--danger:hover {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.btn-with-icon:disabled {
+  background-color: gray;
+  color: #fff;
+  border: none;
+}
+
+.btn-with-icon--round {
+  border-radius: 100px;
+}
+
+.btn-with-icon--block {
+  width: 100%;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}

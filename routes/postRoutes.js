@@ -6,25 +6,35 @@ const likeRouter = require('../routes/likeRoutes');
 
 const router = Router();
 
-router.route('/')
-.post(
+router
+  .route('/')
+  .post(
     authController.protect,
-    postController.uploadPostImages,
-    postController.processPostImages,
+    authController.restrictTo('admin', 'representative'),
     postController.createPost
-)
-.get(postController.getAllPost);
+  )
+  .get(postController.getAllPost);
 
+router
+  .route('/:slug')
+  .get(postController.getPost)
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin', 'representative'),
+    postController.deletePost
+  );
 
-router.route('/:slug')
-.get(postController.getPost)
-.delete(postController.deletePost);
+router.patch(
+  '/:slug/deactivate',
+  authController.protect,
+  authController.restrictTo('admin', 'representative'),
+  postController.deActivatPost
+);
 
 // Embedded comment routes
 router.use('/:slug/comments', commentRouter);
 
 // Embedded like routes
-router.use('/:slug/likes', likeRouter);
-
+router.use('/:targetId/likes', likeRouter);
 
 module.exports = router;

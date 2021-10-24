@@ -1,19 +1,17 @@
 import React from 'react';
 import classes from './Button.module.css';
 
-
-const Button = props => {
+const Button = (props) => {
   return (
-    <div className={classes.form__group}>
-        <button 
-          disabled={props.disabled ? true : false}
-          type={props.type ? props.type : 'button' } 
-          className={`${classes.btn} ${classes[props.className]}`} 
-        >
-          {props.children}
-        </button>
-    </div>
-  )
-}
+    <button
+      disabled={props.isDisabled}
+      type={props.type ? props.type : 'button'}
+      className={`${classes.btn} ${props.className}`}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </button>
+  );
+};
 
 export default Button;

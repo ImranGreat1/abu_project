@@ -1,36 +1,43 @@
-import React, { useRef, useImperativeHandle } from 'react';
+import React, { useRef, useImperativeHandle, Fragment } from 'react';
 import classes from './Input.module.css';
 
 const Input = React.forwardRef((props, ref) => {
-
   const inputRef = useRef();
 
-  const focusInput = () => inputRef.current.focus(); 
+  const focusInput = () => inputRef.current.focus();
 
   useImperativeHandle(ref, () => {
-    return { focus: focusInput, value: inputRef.current.value }
-  })
+    return { focus: focusInput, value: inputRef.current.value };
+  });
 
   return (
-    <div className={classes.form__group}>
-      <label htmlFor={props.id} className={classes.form__label}>{props.label}</label>
-      
-      <input 
+    <Fragment>
+      <label htmlFor={props.id} className={classes.input__label}>
+        {props.label}
+      </label>
+
+      {props.icon && (
+        <small className={classes.input__icon}>{props.icon}</small>
+      )}
+
+      <input
         ref={inputRef}
         className={`
-            ${classes.form__input} 
-            ${props.invalid && classes.invalid}
-            ${props.showErrorMessage && classes['detail-error']}
+            ${classes.input__input} 
+            ${props.errorMessage && classes.invalid}
+            ${props.icon && classes['more-padding']}
             ${props.className}
           `}
+        onChange={props.changeHandler}
+        onBlur={props.onBlur}
+        type={props.type}
+        id={props.id}
         {...props.input}
       />
-      { props.input.type === 'password' && <span className={classes['forget-password']}><a href="#">Forgot your password?</a></span> }
-      {props.showErrorMessage && <p className={classes.form__error}>{props.errorMessage}</p>}
-      {
-        props.input.type === 'password' && !props.showErrorMessage && props.formType === 'signup'
-        && <p className={classes['password-length']}>Password must be atleast 8 characters!</p>}
-    </div>
+      {props.errorMessage && (
+        <p className={classes.input__error}>{props.errorMessage}</p>
+      )}
+    </Fragment>
   );
 });
 

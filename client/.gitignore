@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+#Images and pdfs
+/public/images
+/public/pdfs
+
 # testing
 /coverage
 

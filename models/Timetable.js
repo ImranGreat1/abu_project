@@ -3,58 +3,58 @@ const mongoose = require('mongoose');
 const timetableSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'A timetable must have a name!']
+    required: [true, 'A timetable must have a name!'],
   },
 
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
 
   timetableType: {
     type: String,
-    enum: ['personal', 'departmental'],
-    default: 'personal'
+    enum: ['personal', 'department', 'faculty'],
+    default: 'personal',
   },
 
   shareWithOthers: {
     type: Boolean,
-    default: false
+    default: false,
   },
 
   monday: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Day'
+    ref: 'Day',
   },
 
   tuesday: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Day'
+    ref: 'Day',
   },
 
   wednesday: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Day'
+    ref: 'Day',
   },
 
   thursday: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Day'
+    ref: 'Day',
   },
 
   friday: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Day'
+    ref: 'Day',
   },
 
   saturday: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Day'
+    ref: 'Day',
   },
 
   sunday: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Day'
+    ref: 'Day',
   },
 });
 

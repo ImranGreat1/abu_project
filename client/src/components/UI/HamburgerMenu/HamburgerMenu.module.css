@@ -14,8 +14,8 @@
 
 .nav__close-btn {
   position: absolute;
-  top: .5rem;
-  left: .5rem;
+  top: 0.5rem;
+  left: 0.5rem;
   width: 2.5rem;
   height: 2.5rem;
   border: none;
@@ -61,10 +61,10 @@
 
 .nav__link {
   display: block;
-  padding: .7rem;
+  padding: 0.7rem;
   padding-left: 2.5rem;
   font-size: 1.4rem;
-  transition: all .2s;
+  transition: all 0.2s;
   position: relative;
 }
 
@@ -73,11 +73,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: .4rem;
+  width: 0.4rem;
   height: 100%;
   border-top-right-radius: 3rem;
   border-bottom-right-radius: 3rem;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .nav__link:hover {
@@ -88,7 +88,6 @@
 .nav__link:hover::before {
   background-color: limegreen;
 }
-
 
 .hamburger {
   position: fixed;
@@ -107,16 +106,15 @@
 .hamburger__lines {
   position: relative;
   background-color: #333;
-  height:.3rem;
+  height: 0.3rem;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 50px;
 }
 
 .hamburger__lines::before,
-.hamburger__lines::after
- {
-  content: "";
+.hamburger__lines::after {
+  content: '';
   position: absolute;
   height: 100%;
   width: 100%;
@@ -125,11 +123,11 @@
 }
 
 .hamburger__lines::before {
-  top: .6rem;
+  top: 0.6rem;
 }
 
 .hamburger__lines::after {
-  top: -.6rem;
+  top: -0.6rem;
 }
 
 .hamburger__checkbox {

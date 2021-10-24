@@ -1,0 +1,28 @@
+.day {
+  padding: 1rem 0;
+
+  border-top: 2px solid #777;
+  border-bottom: 2px solid #777;
+  font-size: 1.3rem;
+}
+
+.day:not(:first-child) {
+  border-top: none;
+}
+
+.day__time {
+  font-size: 1.3rem;
+}
+
+.day__time > * {
+  padding: 1rem 0.7rem;
+}
+
+.day__name {
+  color: #111;
+  font-size: 1.6rem;
+}
+
+.day > * {
+  padding: 1rem 0.7rem;
+}

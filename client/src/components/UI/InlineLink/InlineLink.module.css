@@ -1,0 +1,20 @@
+.inline-link__link {
+  display: inline-block;
+  font-size: 1.4rem;
+  color: #1d4ed8;
+  transition: all 0.2s;
+}
+
+.inline-link__link:hover {
+  display: inline-block;
+}
+
+.inline-link__link:hover .inline-link__arrow {
+  transform: translateX(1rem);
+}
+
+.inline-link__arrow {
+  display: inline-block;
+  transform: translateX(0.6rem);
+  transition: all 0.2s;
+}

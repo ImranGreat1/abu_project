@@ -1,0 +1,39 @@
+.search {
+  display: flex;
+  align-items: center;
+}
+
+.search__form-group {
+  width: 100%;
+}
+
+.search__form-input {
+  /* margin-right: 1rem; */
+  padding: 1rem 2rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  width: 100%;
+}
+
+.search__cta {
+  align-self: stretch;
+}
+
+.search__cta-btn {
+  padding: 0.8rem 2rem;
+  height: 100%;
+  border: none;
+}
+
+.search__cta-btn:hover .search__cta-btn-icon {
+  color: #8ce99a;
+}
+
+.search__cta-btn-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  transition: all 0.2s;
+}

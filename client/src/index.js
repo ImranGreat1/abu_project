@@ -3,13 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AuthContextProvider } from './store/authContext';
+import { AuthContextProvider } from './contextStore/authContext';
+import { Provider } from 'react-redux';
+import store from './store/index';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
+    {/* <AuthContextProvider> */}
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+    {/* </AuthContextProvider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

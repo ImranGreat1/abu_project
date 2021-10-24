@@ -2,135 +2,237 @@ const Assignment = require('../models/Assignment');
 const catchAsync = require('../utils/catchAsync');
 const filterBody = require('../utils/filterBody');
 const AppError = require('../utils/appError');
-const { isSameLevelAndDepartment } = require('../utils/generalUtils');
+const Library = require('../models/Library');
+const multer = require('multer');
+const sharp = require('sharp');
+
+const multerStorage = multer.memoryStorage();
+const multerFilter = async (req, file, cb) => {
+  if (!file.mimetype.startsWith('image')) {
+    cb(new AppError('Upload only Images!', 400), false);
+  }
+  cb(null, true);
+};
+
+const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
+
+exports.uploadImage = upload.single('image');
+
+exports.processImage = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+
+  // Generate unique name for each image
+  const imageName = `assignment-image-${Date.now()}-${
+    JSON.stringify(Math.random()).split('.')[1]
+  }.jpg`;
+
+  // Process image with sharp
+  await sharp(req.file.buffer)
+    .toFormat('jpeg')
+    .jpeg({ quality: 100 })
+    .toFile(`client/public/images/assignments/${imageName}`);
+
+  // Send image to next middleware
+  res.locals.image = imageName;
+  next();
+});
 
 // Create Assignment
 exports.createAssignment = catchAsync(async (req, res, next) => {
   // Filter request body
-  const body = filterBody(
+  let requestData = filterBody(
     req.body,
-    'description', 
-    'courseCode', 
-    'submissionDate', 
-    'toBeSubmittedTo', 
+    'description',
+    'courseCode',
+    'submissionDate',
+    'toBeSubmittedTo',
     'active'
   );
-  
-  // Set the remaining fields from the request user information
-  body.postedBy = req.user.id;
-  body.department = req.user.department;
-  body.level = req.user.level;
-  
+  const userInfo = filterBody(
+    req.userProfile,
+    'faculty',
+    'department',
+    'level'
+  );
+  requestData = { ...requestData, ...userInfo, postedBy: req.user._id };
+
+  // Set image if provided to description
+  if (res.locals.image) {
+    requestData.image = res.locals.image;
+  }
+
   // New Assignment
-  const newAssignment = await Assignment.create(body);
+  const newAssignment = await Assignment.create(requestData);
 
   // Response
   res.status(201).json({
     status: 'success',
     data: {
-      data: newAssignment
-    }
+      data: newAssignment,
+    },
   });
-})
-
+});
 
 // Update/Edit Assignment
 exports.updateAssignment = catchAsync(async (req, res, next) => {
   // Filter request body
-  const body = filterBody(
+  const requestData = filterBody(
     req.body,
-    'description', 
-    'courseCode', 
-    'submissionDate', 
-    'toBeSubmittedTo', 
+    'description',
+    'courseCode',
+    'submissionDate',
+    'toBeSubmittedTo',
     'active'
   );
 
-  const assignment = await Assignment.findOne({ slug: req.params.slug });
+  const userInfo = filterBody(
+    req.userProfile,
+    'faculty',
+    'department',
+    'level'
+  );
+  const query = {
+    slug: req.params.slug,
+    active: true,
+    postedBy: req.user._id,
+    ...userInfo,
+  };
 
-  // Add validations
-  if (!isSameLevelAndDepartment(req.user, assignment)) {
-    return next(new AppError('You cannot perform this operation for other departments', 400));
+  // If a new image is uploaded
+  if (res.locals.image) {
+    requestData.image = res.locals.image;
   }
 
   // Updated Assingment
   const updatedAssignment = await Assignment.findOneAndUpdate(
-    { slug:  req.params.slug}, 
-    body, 
-    { new: true,  runValidators: true}
+    query,
+    requestData,
+    { new: true, runValidators: true }
   );
 
   // Response
   res.status(200).json({
     status: 'success',
     data: {
-      data: updatedAssignment
-    }
+      data: updatedAssignment,
+    },
   });
-
 });
-
 
 // Get Assignments
 exports.getAllAssignments = catchAsync(async (req, res, next) => {
   // Filter for the specific user department and level
-  let query = { department: req.user.department, level: req.user.level };
+  const userInfo = {
+    faculty: req.userProfile.faculty,
+    department: req.userProfile.department,
+    level: req.userProfile.level,
+    active: true,
+  };
 
-  // Run validations
+  const assignmentCount = await Assignment.estimatedDocumentCount();
 
-  // Check if additional queries are sent in the URL
-  if (req.query)
-  {
-    const body = filterBody(req.query, 'courseCode', 'description');
-    query = {...query, ...body};
-  }
-
-  // Assignments
-  const assignments = await Assignment.find(query);
+  const assignments = await Assignment.find(userInfo)
+    .limit(+req.query.limit)
+    .skip(+req.query.page * +req.query.limit);
 
   // Response
   res.status(200).json({
     status: 'success',
     results: assignments.length,
     data: {
-      data: assignments
-    }
+      totalDocs: assignmentCount,
+      data: assignments,
+    },
   });
-
-}); 
-
+});
 
 // Get Single Assignment
 exports.getAssignment = catchAsync(async (req, res, next) => {
-  const assignment = await Assignment.findOne({ slug: req.params.slug });
+  const assignment = await Assignment.findOne({
+    slug: req.params.slug,
+    active: true,
+  });
 
   res.status(200).json({
     status: 'success',
     data: {
-      data: assignment
-    }
+      data: assignment,
+    },
   });
 });
-
 
 // Delete Assignment
 exports.deleteAssignment = catchAsync(async (req, res, next) => {
-  const assignment = await Assignment.findOne({ slug: req.params.slug });
-
-  // Run Validations
-  if (!isSameLevelAndDepartment(req.user, assignment)) {
-    return next(new AppError('You cannot perform this operation for other departments', 400));
-  }
+  const userInfo = filterBody(
+    req.userProfile,
+    'faculty',
+    'department',
+    'level'
+  );
+  const query = {
+    slug: req.params.slug,
+    postedBy: req.user._id,
+    ...userInfo,
+  };
 
   // Delete Assignment
-  await Assignment.deleteOne({ slug: req.params.slug });
+  await Assignment.deleteOne(query);
 
-  // Response: status of 204 will be proper but it won't return a response 
+  // Response: status of 204 will be proper but it won't return a response
   res.status(200).json({
     status: 'success',
-    data: null
+    data: null,
   });
-
 });
 
+// Deactivate Assignment
+exports.deActivateAssignment = catchAsync(async (req, res, next) => {
+  const userInfo = filterBody(
+    req.userProfile,
+    'faculty',
+    'department',
+    'level'
+  );
+  const query = {
+    slug: req.params.slug,
+    postedBy: req.user._id,
+    ...userInfo,
+  };
 
+  // Set Active to false
+  await Assignment.updateOne(query, { active: false }, { new: true });
+
+  // Response with no data
+  res.status(200).json({
+    status: 'success',
+    data: null,
+  });
+});
+
+// Add handout to library
+exports.saveAssignmentToLibrary = catchAsync(async (req, res, next) => {
+  const userLibrary = await Library.findOneAndUpdate(
+    { user: req.user.id },
+    { $push: { assignments: req.body.assignmentId } },
+    { new: true }
+  );
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: userLibrary,
+    },
+  });
+});
+
+// Remove handout from library
+exports.removeAssignmentFromLibrary = catchAsync(async (req, res, next) => {
+  await Library.findOneAndUpdate(
+    { user: req.user.id },
+    { $pull: { assignments: req.body.assignmentId } },
+    { new: true }
+  );
+  res.status(200).json({
+    status: 'success',
+    data: null,
+  });
+});
